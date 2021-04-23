@@ -1,0 +1,30 @@
+.App-header {
+  background-color: #4258c0;
+  position: fixed;
+  width: 100%;
+  padding:10px
+}
+
+.App-header img{
+  padding-left: 20px;
+}
+
+.App-footer{
+  width:100%;
+  background-color: #4258c0;
+  color: #fff;
+  text-align: center;
+}
+
+.App-chart-row {
+  height: 400px;
+  padding: 20px;
+  border: 1px solid;
+  margin: 10px;
+}
+
+.App-cityData.col {
+  padding: 20px;
+  border: 1px solid;
+  margin: 5px;
+}
