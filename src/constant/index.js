@@ -1,4 +1,4 @@
-export const webSocketURL  = 'wss://city-ws.herokuapp.com:80/';
+export const webSocketURL  = 'wss://city-ws.herokuapp.com/';
 
 export const goodAQI = {
     color:'#55A850',
