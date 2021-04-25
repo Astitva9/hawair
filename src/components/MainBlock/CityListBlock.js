@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
-import {getCityListWithAQI,getAQIColor} from '../../utility';
-
+import { getAQIColor, GetCityAQI } from "../../utility";
 
 const CityListBlock = ({ citiesAQI }) => {
-
-  const [citiesChartAQI, setCitiesChartAQI] = useState([]);
-
-  useEffect(() => {
-    if(citiesAQI.length>0){
-      const cities = getCityListWithAQI(citiesAQI)
-      setCitiesChartAQI(cities);
-    }
-  }, [citiesAQI, citiesChartAQI]);
-
+  const citiesChartAQI = GetCityAQI(citiesAQI);
 
   let cityListComponent = "";
   if (citiesChartAQI.length > 0) {

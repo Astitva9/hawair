@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { cities } from "../config/defaultCityList";
 import {
   webSocketURL,
@@ -74,4 +75,37 @@ const connectWebSocket = async (setCitiesAQI, socket) => {
   };
 };
 
-export { getCityListWithAQI, getAQIColor, connectWebSocket };
+const GetWebSocketData = () =>{
+  const [citiesAQI, setCitiesAQI] = useState([]);
+
+  useEffect(() => {
+
+    console.log("use effect main block");
+
+    let socket ='';
+
+    connectWebSocket(setCitiesAQI,socket);
+   
+    return () => {
+     if(socket!=='') socket.close();
+     console.log('Connection Closed')
+    };
+  }, []);
+
+  return citiesAQI;
+}
+
+const GetCityAQI = (citiesAQI) =>{
+  const [citiesChartAQI, setCitiesChartAQI] = useState([]);
+
+  useEffect(() => {
+    if(citiesAQI.length>0){
+      const cities = getCityListWithAQI(citiesAQI)
+      setCitiesChartAQI(cities);
+    }
+  }, [citiesAQI]);
+
+  return citiesChartAQI;
+}
+
+export { getCityListWithAQI, getAQIColor, connectWebSocket, GetWebSocketData, GetCityAQI };

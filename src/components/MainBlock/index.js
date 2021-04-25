@@ -1,29 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import ChartBlock from "./ChartBlock";
 import CityListBlock from "./CityListBlock";
-import {connectWebSocket} from '../../utility';
+import { GetWebSocketData } from "../../utility";
 
 const MainBlock = () => {
-
-const [citiesAQI, setCitiesAQI] = useState([]);
-
-  useEffect(() => {
-
-    let socket ='';
-
-    connectWebSocket(setCitiesAQI,socket);
-   
-    return () => {
-     if(socket!=='') socket.close();
-     console.log('Connection Closed')
-    };
-  }, []);
+  const citiesAQI = GetWebSocketData();
 
   return (
     <Container>
-      <ChartBlock citiesAQI={citiesAQI}/>
-      <CityListBlock citiesAQI={citiesAQI}/>
+      <ChartBlock citiesAQI={citiesAQI} />
+      <CityListBlock citiesAQI={citiesAQI} />
     </Container>
   );
 };
