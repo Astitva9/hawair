@@ -2,7 +2,8 @@
   background-color: #4258c0;
   position: fixed;
   width: 100%;
-  padding:10px
+  padding: 10px;
+  z-index: 999999;
 }
 
 .App-header img{
@@ -22,6 +23,7 @@
   border: 1px solid #b3afaf;
   margin: 10px;
   border-radius: 10px;
+  margin-top: 80px;
 }
 
 .App-cityData {
