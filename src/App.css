@@ -19,12 +19,24 @@
 .App-chart-row {
   height: 400px;
   padding: 20px;
-  border: 1px solid;
+  border: 1px solid #b3afaf;
   margin: 10px;
+  border-radius: 10px;
 }
 
-.App-cityData.col {
+.App-cityData {
   padding: 20px;
-  border: 1px solid;
+  border: 1px solid #b3afaf;
   margin: 5px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: medium;
+  font-family: fangsong;
+  font-weight: 600;
+}
+
+.App-cityData:hover {
+  -ms-transform: scale(1.02); /* IE 9 */
+  -webkit-transform: scale(1.02); /* Safari 3-8 */
+  transform: scale(1.02); 
 }
