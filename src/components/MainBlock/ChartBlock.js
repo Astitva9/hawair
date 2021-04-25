@@ -1,3 +1,8 @@
+/*
+* @Component 
+* This Component Plots the line chart among all the cities with there AQI values
+* @Author: Astitva Srivastava
+*/
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { GetCityAQI } from "../../utility";

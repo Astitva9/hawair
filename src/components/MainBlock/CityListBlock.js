@@ -1,6 +1,11 @@
+/*
+* @Component 
+* This Component plot all the list of the city with respective AQI Values and Category
+* @Author: Astitva Srivastava
+*/
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { getAQIColor, GetCityAQI } from "../../utility";
+import { getAQIColorAndCategory, GetCityAQI } from "../../utility";
 
 const CityListBlock = ({ citiesAQI }) => {
   const citiesChartAQI = GetCityAQI(citiesAQI);
@@ -8,7 +13,7 @@ const CityListBlock = ({ citiesAQI }) => {
   let cityListComponent = "";
   if (citiesChartAQI.length > 0) {
     cityListComponent = citiesChartAQI.map(({ city, aqi }, index) => {
-      let { aqiColor, category } = getAQIColor(aqi);
+      let { aqiColor, category } = getAQIColorAndCategory(aqi);
       return (
         <Row
           key={index}

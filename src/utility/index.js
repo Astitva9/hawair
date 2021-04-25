@@ -11,6 +11,9 @@ import {
 } from "../constant";
 
 const getCityListWithAQI = (citiesAQI) => {
+  /* 
+  * Making the Default City List which keeps getting updated on each new message
+  */
   if (citiesAQI.length > 0) {
     for (let i = 0; i < cities.length; i++) {
       if (citiesAQI[i] !== undefined) {
@@ -24,7 +27,10 @@ const getCityListWithAQI = (citiesAQI) => {
   return cities;
 };
 
-const getAQIColor = (_aqi) => {
+const getAQIColorAndCategory = (_aqi) => {
+  /* 
+  * Provides the color code and category name according to the AQI value
+  */
   let aqiColor = goodAQI.color;
   let category = goodAQI.categoryName;
   let aqi = parseInt(_aqi);
@@ -55,6 +61,9 @@ const getAQIColor = (_aqi) => {
 };
 
 const connectWebSocket = async (setCitiesAQI, socket) => {
+  /* 
+  * Handles the Websocket Connection
+  */
   socket = new WebSocket(webSocketURL);
 
   socket.onmessage = function (event) {
@@ -69,6 +78,7 @@ const connectWebSocket = async (setCitiesAQI, socket) => {
     } else {
       // e.g. server process killed or network down
       // event.code is usually 1006 in this case
+      // try to reconnect as well
       socket = new WebSocket(webSocketURL);
       console.error("[close] Connection died");
     }
@@ -76,11 +86,12 @@ const connectWebSocket = async (setCitiesAQI, socket) => {
 };
 
 const GetWebSocketData = () =>{
+  /* 
+  * Custom hook for getting the city AQI list from webhook
+  */
   const [citiesAQI, setCitiesAQI] = useState([]);
 
   useEffect(() => {
-
-    console.log("use effect main block");
 
     let socket ='';
 
@@ -88,7 +99,6 @@ const GetWebSocketData = () =>{
    
     return () => {
      if(socket!=='') socket.close();
-     console.log('Connection Closed')
     };
   }, []);
 
@@ -96,6 +106,9 @@ const GetWebSocketData = () =>{
 }
 
 const GetCityAQI = (citiesAQI) =>{
+  /* 
+  * Custom hook for mapping the websocket data with default city AQI List, so List can be of fixed size always
+  */
   const [citiesChartAQI, setCitiesChartAQI] = useState([]);
 
   useEffect(() => {
@@ -108,4 +121,4 @@ const GetCityAQI = (citiesAQI) =>{
   return citiesChartAQI;
 }
 
-export { getCityListWithAQI, getAQIColor, connectWebSocket, GetWebSocketData, GetCityAQI };
+export { getCityListWithAQI, getAQIColorAndCategory, connectWebSocket, GetWebSocketData, GetCityAQI };
