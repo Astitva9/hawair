@@ -15,6 +15,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 
@@ -53,6 +54,7 @@ const ChartBlock = ({ citiesAQI }) => {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="city" />
             <YAxis dataKey="aqi" domain={[0, 500]} />
+            <Tooltip />
             <Bar
               dataKey="aqi"
               fill="#8884d8"
