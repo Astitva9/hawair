@@ -137,7 +137,7 @@ const getCityListComponent = (citiesChartAQI, searchQuery) => {
   if (citiesChartAQI.length > 0) {
     cityListComponent = citiesChartAQI
       .sort((a, b) => {
-        return a.aqi - b.aqi;
+        return b.aqi - a.aqi;
       })
       .filter(({ city }) => {
         return city.toLowerCase().includes(searchQuery.toLowerCase());
@@ -164,6 +164,21 @@ const getCityListComponent = (citiesChartAQI, searchQuery) => {
   return cityListComponent;
 };
 
+const getPath = (x, y, width, height) => `M${x},${y + height}
+          C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${
+  x + width / 2
+}, ${y}
+          C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${
+  y + height
+} ${x + width}, ${y + height}
+          Z`;
+
+const triangleBar = (props) => {
+  const { fill, x, y, width, height } = props;
+
+  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+};
+
 export {
   getCityListWithAQI,
   getAQIColorAndCategory,
@@ -171,4 +186,5 @@ export {
   GetWebSocketData,
   GetCityAQI,
   getCityListComponent,
+  triangleBar,
 };
