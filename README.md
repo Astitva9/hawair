@@ -5,7 +5,7 @@
 ## Installation
 
 ```sh
-$ npm install --save hawair
+$ npm install
 ```
 
 ## Server Hosted On
