@@ -18,7 +18,7 @@ const CityListBlock = ({ citiesAQI }) => {
     <Row className="App-cityList">
       <Col>
         <Row>
-          <Col>
+          <Col className="search-box">
             <Form.Group>
               <Form.Control
                 type="text"

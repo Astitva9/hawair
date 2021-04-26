@@ -37,6 +37,11 @@
   font-weight: 600;
 }
 
+.col.search-box {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
 .App-cityData:hover {
   -ms-transform: scale(1.02); /* IE 9 */
   -webkit-transform: scale(1.02); /* Safari 3-8 */
