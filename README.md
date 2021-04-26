@@ -27,6 +27,12 @@ $ npm start
 - City list with AQI Level and what is the category of Air Quality
 ```
 
+## Time Invested
+
+```sh
+- Approx 5-6 hour of Work I have putin from scratch to final code Refactoring
+```
+
 ## License
 
 MIT © [Astitva Srivastava]()

@@ -35,28 +35,28 @@ const getAQIColorAndCategory = (_aqi) => {
    * Provides the color code and category name according to the AQI value
    */
   let aqiColor = goodAQI.color;
-  let category = goodAQI.categoryName;
-  let aqi = parseInt(_aqi);
+  let category = "Fetching...";
+  let aqi = ~~_aqi;
 
   if (aqi > goodAQI.minRange && aqi <= goodAQI.maxRange) {
     aqiColor = goodAQI.color;
     category = goodAQI.categoryName;
   } else if (
-    aqi > satisfactoryAQI.minRange &&
+    aqi >= satisfactoryAQI.minRange &&
     aqi <= satisfactoryAQI.maxRange
   ) {
     aqiColor = satisfactoryAQI.color;
     category = satisfactoryAQI.categoryName;
-  } else if (aqi > moderateAQI.minRange && aqi <= moderateAQI.maxRange) {
+  } else if (aqi >= moderateAQI.minRange && aqi <= moderateAQI.maxRange) {
     aqiColor = moderateAQI.color;
     category = moderateAQI.categoryName;
-  } else if (aqi > poorAQI.minRange && aqi <= poorAQI.maxRange) {
+  } else if (aqi >= poorAQI.minRange && aqi <= poorAQI.maxRange) {
     aqiColor = poorAQI.color;
     category = poorAQI.categoryName;
-  } else if (aqi > veryPoorAQI.minRange && aqi <= veryPoorAQI.maxRange) {
+  } else if (aqi >= veryPoorAQI.minRange && aqi <= veryPoorAQI.maxRange) {
     aqiColor = veryPoorAQI.color;
     category = veryPoorAQI.categoryName;
-  } else if (aqi > severeAQI.minRange && aqi <= severeAQI.maxRange) {
+  } else if (aqi >= severeAQI.minRange && aqi <= severeAQI.maxRange) {
     aqiColor = severeAQI.color;
     category = severeAQI.categoryName;
   }
@@ -136,16 +136,26 @@ const getCityListComponent = (citiesChartAQI, searchQuery) => {
   );
   if (citiesChartAQI.length > 0) {
     cityListComponent = citiesChartAQI
+      .sort((a, b) => {
+        return a.aqi - b.aqi;
+      })
       .filter(({ city }) => {
         return city.toLowerCase().includes(searchQuery.toLowerCase());
       })
-      .map(({ city, aqi }, index) => {
+      .map(({ city, aqi, icon }, index) => {
         let { aqiColor, category } = getAQIColorAndCategory(aqi);
         return (
           <Row key={index} className="App-cityData">
-            <Col style={{ color: "#fff" }}>{city}</Col>
-            <Col style={{ color: aqiColor }}>{aqi}</Col>
-            <Col style={{ color: aqiColor }}>{category}</Col>
+            <Col style={{ color: "#fff" }} className="align-self-center">
+              <img src={icon} alt={city} width="50" height="50"></img>
+              <p>{city}</p>
+            </Col>
+            <Col style={{ color: aqiColor }} className="align-self-center">
+              {aqi}
+            </Col>
+            <Col style={{ color: aqiColor }} className="align-self-center">
+              {category}
+            </Col>
           </Row>
         );
       });
