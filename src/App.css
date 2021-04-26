@@ -27,14 +27,13 @@
 }
 
 .App-cityData {
-  padding: 20px;
-  border: 1px solid #b3afaf;
-  margin: 5px;
-  border-radius: 5px;
+  padding: 10px;
   text-align: center;
   font-size: medium;
   font-family: fangsong;
   font-weight: 600;
+  border-bottom: 1px solid #fff;
+  background-color: #020d42
 }
 
 .col.search-box {
@@ -46,4 +45,26 @@
   -ms-transform: scale(1.02); /* IE 9 */
   -webkit-transform: scale(1.02); /* Safari 3-8 */
   transform: scale(1.02); 
+  opacity: 1;
+}
+
+.App-CityList-header {
+  background-color: #4258c0;
+  color: #fff;
+}
+
+.App-CityList-header {
+  background-color: #4258c0;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.recharts-layer{
+  font-weight: 600;
+}
+
+input.form-control {
+  border: 1px solid #4258c0 !important;
+  background-color: #fdfdfd !important;
 }

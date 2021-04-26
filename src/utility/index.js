@@ -142,14 +142,10 @@ const getCityListComponent = (citiesChartAQI, searchQuery) => {
       .map(({ city, aqi }, index) => {
         let { aqiColor, category } = getAQIColorAndCategory(aqi);
         return (
-          <Row
-            key={index}
-            className="App-cityData"
-            style={{ backgroundColor: aqiColor }}
-          >
-            <Col>{city}</Col>
-            <Col>{aqi}</Col>
-            <Col>{category}</Col>
+          <Row key={index} className="App-cityData">
+            <Col style={{ color: "#fff" }}>{city}</Col>
+            <Col style={{ color: aqiColor }}>{aqi}</Col>
+            <Col style={{ color: aqiColor }}>{category}</Col>
           </Row>
         );
       });

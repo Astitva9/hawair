@@ -30,7 +30,16 @@ const CityListBlock = ({ citiesAQI }) => {
           <Col></Col>
           <Col></Col>
         </Row>
-        {cityListComponent}
+        <Row className="App-list-block">
+          <Col>
+            <Row className="App-CityList-header">
+              <Col>City Name</Col>
+              <Col>AQI</Col>
+              <Col>Category</Col>
+            </Row>
+            {cityListComponent}
+          </Col>
+        </Row>
       </Col>
     </Row>
   );
