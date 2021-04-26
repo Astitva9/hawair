@@ -1,4 +1,4 @@
-# hawair [![NPM version](https://badge.fury.io/js/hawair.svg)](https://npmjs.org/package/hawair) [![Build Status](https://travis-ci.org/Astitva9/hawair.svg?branch=master)](https://travis-ci.org/Astitva9/hawair)
+# Hawair [![NPM version](https://badge.fury.io/js/hawair.svg)](https://npmjs.org/package/hawair) [![Build Status](https://travis-ci.org/Astitva9/hawair.svg?branch=master)](https://travis-ci.org/Astitva9/hawair)
 
 > A web Based Air Quality Monitoring Tool
 
@@ -30,7 +30,7 @@ $ npm start
 ## Time Invested
 
 ```sh
-- Approx 5-6 hour of Work I have putin from scratch to final code Refactoring
+- Approx 6-7 hour of Work I have putin from scratch to final code Refactoring
 ```
 
 ## License
