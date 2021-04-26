@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { cities } from "../config/defaultCityList";
+import { Row, Col } from "react-bootstrap";
+
 import {
   webSocketURL,
   goodAQI,
@@ -8,12 +10,13 @@ import {
   poorAQI,
   veryPoorAQI,
   severeAQI,
+  defaultCellColor,
 } from "../constant";
 
 const getCityListWithAQI = (citiesAQI) => {
-  /* 
-  * Making the Default City List which keeps getting updated on each new message
-  */
+  /*
+   * Making the Default City List which keeps getting updated on each new message
+   */
   if (citiesAQI.length > 0) {
     for (let i = 0; i < cities.length; i++) {
       if (citiesAQI[i] !== undefined) {
@@ -28,9 +31,9 @@ const getCityListWithAQI = (citiesAQI) => {
 };
 
 const getAQIColorAndCategory = (_aqi) => {
-  /* 
-  * Provides the color code and category name according to the AQI value
-  */
+  /*
+   * Provides the color code and category name according to the AQI value
+   */
   let aqiColor = goodAQI.color;
   let category = goodAQI.categoryName;
   let aqi = parseInt(_aqi);
@@ -61,9 +64,9 @@ const getAQIColorAndCategory = (_aqi) => {
 };
 
 const connectWebSocket = async (setCitiesAQI, socket) => {
-  /* 
-  * Handles the Websocket Connection
-  */
+  /*
+   * Handles the Websocket Connection
+   */
   socket = new WebSocket(webSocketURL);
 
   socket.onmessage = function (event) {
@@ -85,40 +88,81 @@ const connectWebSocket = async (setCitiesAQI, socket) => {
   };
 };
 
-const GetWebSocketData = () =>{
-  /* 
-  * Custom hook for getting the city AQI list from webhook
-  */
+const GetWebSocketData = () => {
+  /*
+   * Custom hook for getting the city AQI list from webhook
+   */
   const [citiesAQI, setCitiesAQI] = useState([]);
 
   useEffect(() => {
+    let socket = "";
 
-    let socket ='';
+    connectWebSocket(setCitiesAQI, socket);
 
-    connectWebSocket(setCitiesAQI,socket);
-   
     return () => {
-     if(socket!=='') socket.close();
+      if (socket !== "") socket.close();
     };
   }, []);
 
   return citiesAQI;
-}
+};
 
-const GetCityAQI = (citiesAQI) =>{
-  /* 
-  * Custom hook for mapping the websocket data with default city AQI List, so List can be of fixed size always
-  */
+const GetCityAQI = (citiesAQI) => {
+  /*
+   * Custom hook for mapping the websocket data with default city AQI List, so List can be of fixed size always
+   */
   const [citiesChartAQI, setCitiesChartAQI] = useState([]);
 
   useEffect(() => {
-    if(citiesAQI.length>0){
-      const cities = getCityListWithAQI(citiesAQI)
+    if (citiesAQI.length > 0) {
+      const cities = getCityListWithAQI(citiesAQI);
       setCitiesChartAQI(cities);
     }
   }, [citiesAQI]);
 
   return citiesChartAQI;
-}
+};
 
-export { getCityListWithAQI, getAQIColorAndCategory, connectWebSocket, GetWebSocketData, GetCityAQI };
+const getCityListComponent = (citiesChartAQI, searchQuery) => {
+  /*
+   * Plots the list of the cities
+   */
+  let cityListComponent = (
+    <Row className="App-cityData" style={{ backgroundColor: defaultCellColor }}>
+      <Col></Col>
+      <Col>Loading</Col>
+      <Col></Col>
+    </Row>
+  );
+  if (citiesChartAQI.length > 0) {
+    cityListComponent = citiesChartAQI
+      .filter(({ city }) => {
+        return city.toLowerCase().includes(searchQuery.toLowerCase());
+      })
+      .map(({ city, aqi }, index) => {
+        let { aqiColor, category } = getAQIColorAndCategory(aqi);
+        return (
+          <Row
+            key={index}
+            className="App-cityData"
+            style={{ backgroundColor: aqiColor }}
+          >
+            <Col>{city}</Col>
+            <Col>{aqi}</Col>
+            <Col>{category}</Col>
+          </Row>
+        );
+      });
+  }
+
+  return cityListComponent;
+};
+
+export {
+  getCityListWithAQI,
+  getAQIColorAndCategory,
+  connectWebSocket,
+  GetWebSocketData,
+  GetCityAQI,
+  getCityListComponent,
+};
